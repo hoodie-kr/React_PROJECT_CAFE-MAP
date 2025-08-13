@@ -1,0 +1,1 @@
+export default function RankingTabs({value,onChange}){const tabs=[{key:'sales',label:'매출 1등'},{key:'review',label:'리뷰 1등'},{key:'trending',label:'최근 인기 1등'}];return(<div className='tabs'>{tabs.map(t=>(<button key={t.key} className={value===t.key?'tab active':'tab'} onClick={()=>onChange(t.key)}>{t.label}</button>))}</div>)}
