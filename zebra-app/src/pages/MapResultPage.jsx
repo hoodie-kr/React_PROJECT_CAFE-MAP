@@ -1,6 +1,0 @@
-import {useEffect,useState} from 'react'
-import {useLocation} from 'react-router-dom'
-import MapView from '../components/map/MapView'
-import HoloCard from '../components/common/HoloCard'
-import {searchCafes} from '../apis/cafeApi'
-export default function MapResultPage(){const {state}=useLocation();const[center,setCenter]=useState({lat:37.5665,lng:126.978});const[marker,setMarker]=useState(null);const[selected,setSelected]=useState(null);useEffect(()=>{(async()=>{try{const {data}=await searchCafes({cafe:state?.cafe,area:state?.area});const hit=data?.[0];if(hit){const p={lat:hit.latitude,lng:hit.longitude};setCenter(p);setMarker(p);setSelected({name:hit.cafeName,address:hit.address,...p,rating:4.7,hours:'08:00~20:00'});return}}catch{}const d={lat:37.4407,lng:127.1296,name:state?.cafe||'스위트 카페',address:(state?.area||'경기도 성남시 중원구')+' 중앙동 123',rating:4.7,hours:'08:00~20:00'};setCenter({lat:d.lat,lng:d.lng});setMarker({lat:d.lat,lng:d.lng});setSelected(d)})()},[state]);return(<div className='screen' style={{gap:18}}><MapView center={center} marker={marker} onClick={setMarker}/><HoloCard cafe={selected} onRoute={()=>window.open(`https://map.kakao.com/link/to/${encodeURIComponent(selected.name)},${selected.lat},${selected.lng}`)} onCall={()=>window.open('tel:010-0000-0000')}/></div>)}
