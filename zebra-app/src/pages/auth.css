@@ -1,0 +1,92 @@
+/* 화면 전체를 앱처럼 (헤더 없이) */
+.auth-screen {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #b5b5ff 0%, #c896ff 45%, #8ed0ff 100%);
+}
+
+/* 중앙 정렬 + 최대 폭 제한 (사진 느낌) */
+.auth-shell {
+  width: 100%;
+  max-width: 760px;      /* 가운데 컬럼 폭 */
+  padding: 32px 20px;
+}
+
+/* 말랑 카드(네오몰픽) */
+.auth-panel {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 520px;      /* ← 로그인창 크기 여기서 조절 */
+  border-radius: 18px;
+  padding: 28px 26px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    12px 12px 24px rgba(0,0,0,0.12),
+    inset 2px 2px 6px rgba(255,255,255,0.45),
+    inset -2px -2px 6px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255,255,255,0.45);
+}
+
+/* 제목/서브 */
+.panel-title {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: .5px;
+  color: #3256b6;
+  margin: 2px 0 4px;
+}
+.panel-sub {
+  text-align: center;
+  color: #284a9e;
+  opacity: .85;
+  margin-bottom: 18px;
+}
+
+/* 폼 */
+.auth-form { display: grid; gap: 14px; }
+.field { display: grid; gap: 8px; }
+.field label {
+  font-size: 13px; font-weight: 700;
+  color: #21418f; opacity: .9;
+}
+.field input {
+  width: 100%;
+  border: 0;
+  outline: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #1b2f66;
+  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(240,242,255,.85));
+  box-shadow:
+    4px 4px 10px rgba(55, 84, 170, .2),
+    inset 1px 2px 3px rgba(255,255,255,.8);
+}
+.field input::placeholder { color: #7e8fc8; }
+
+/* 에러 박스 */
+.error {
+  background: rgba(255, 121, 121, .18);
+  color: #591e1e;
+  border: 1px solid rgba(255, 121, 121, .5);
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+/* 둥근 CTA 버튼 (파스텔) */
+.btn-cta {
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 14px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: .2px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #5f8fff, #7aa8ff);
+  box-shadow:
+    6px 8px 16px rgba(64, 94,44);
+}
