@@ -371,3 +371,353 @@ body{
   --bg3:#06b6d4;  /* 시안 */
   --bg-whiten:.26; /* 배경 밝게 덧씌우는 투명도 (0.18~0.34 조절) */
 }
+/* ===== 레이아웃: 살짝 아래쪽 정렬 ===== */
+.auth-page {
+  min-height: 100dvh;          /* 전체 화면 높이 채우기 */
+  display: flex;
+  justify-content: center;     /* 가로 가운데 */
+  align-items: flex-start;     /* 위에서부터 시작 */
+  padding-top: 14vh;           /* ⬅ 원하는 만큼 아래로 내리기 (중앙보다 조금 아래) */
+}
+
+/* ===== 로그인 카드: 세로 2배 ===== */
+.login-card {
+  width: 420px;                /* 필요 시 조정 */
+  height: 999px;               /* ⬅ 기존 ~400px대 카드였다면 2배 느낌 (원하면 760~900px 사이로) */
+  padding: 28px 24px;
+  border-radius: 18px;
+
+  /* 기존 유리(글래스) 느낌과 조화 */
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;                   /* 폼 요소 간 간격 */
+}
+
+/* 작은 화면에서 너무 길면 살짝 줄이기 */
+@media (max-width: 480px) {
+  .login-card {
+    width: 92vw;
+    height: 88vh;              /* 모바일은 화면에 무리 없게 */
+  }
+  .auth-page { padding-top: 8vh; }
+}
+/* === 로그인 박스를 조금 더 아래로 === */
+.screen {
+  padding-top: 10vh;           /* 원하는 만큼 숫자만 조절 (8~14vh 권장) */
+}
+
+/* === 로그인 박스 세로 길게 === */
+.app-card {
+  min-height: 640px;           /* 체감 2배 정도. 더 길게면 720~820px */
+}
+/* 로그인 화면은 가운데 정렬 */
+.login-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* 세로 가운데 */
+  align-items: center;
+  padding: 0 !important;
+}
+
+/* 첫 홈화면은 위쪽 정렬 */
+.home-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* 위쪽으로 */
+  align-items: center;
+  padding-top: 5vh;             /* 살짝 여백만 */
+}
+
+/* 화면 컨테이너 기본 */
+.stage {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.phone-shell {
+  width: clamp(320px, 92vw, 420px);
+  height: min(92vh, 860px);
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(255,255,255,.35), rgba(255,255,255,.18));
+  box-shadow: 0 30px 80px rgba(0,0,0,.22), 0 8px 20px rgba(0,0,0,.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.screen { padding: 24px; }
+
+
+
+/* 메뉴 화면 */
+.menu-page {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: clamp(240px, 70vw, 360px);
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(8px);
+}
+.menu-card .btn {
+  height: 56px;
+  font-size: 18px;
+  font-weight: 800;
+  width: 100%;
+}
+/* --- MENU: 정확히 가운데 + 자연스러운 폭 --- */
+.menu-screen{
+  display: grid;              /* grid로 중앙정렬 */
+  place-items: center;        /* 가로/세로 중앙 */
+  padding: 24px;              /* 화면 여백 */
+}
+.menu-card{
+  width: min(400px, 100%);    /* 조금 더 넓게 */
+  margin: 0 auto;             /* 수평 중앙 */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(8px);
+}
+.menu-card .btn{
+  width: 100%;
+  height: 60px;               /* 버튼 키움 */
+  font-size: 20px;
+  font-weight: 800;
+  justify-content: center;    /* 내용 중앙 */
+  user-select: none;
+}
+/* ===== TOP 카페 화면 ===== */
+.top-screen{
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+/* 카드(샘플처럼 진한 블루 느낌 & 흰 글자) */
+.rank-card{
+  width: min(420px, 100%);
+  padding: 16px 16px 18px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #3c6ab6, #2c5fa3);
+  color: #fff;
+  box-shadow: 0 18px 36px rgba(16,24,40,.2);
+}
+
+/* 상단 탭 3개 */
+.rank-tabs{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.rank-tabs .tab{
+  height: 28px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.16);
+  color: #eaf1ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+.rank-tabs .tab.is-active{
+  background: rgba(255,255,255,.28);
+  color: #fff;
+}
+
+/* 제목 */
+.rank-title{
+  text-align: center;
+  font-weight: 900;
+  font-size: 20px;
+  margin: 8px 0 10px;
+  letter-spacing: .04em;
+}
+
+/* 리스트(1~10) */
+.rank-list{
+  list-style: decimal inside;
+  margin: 0 2px 12px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.rank-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 6px;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
+.rank-row .place{ font-weight: 800; }
+.rank-row .loc{ opacity: .95; }
+
+/* 하단 ZEBRA 버튼(알약형) */
+.zebra-cta{
+  width: 100%;
+  height: 40px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 14px;
+  background: linear-gradient(135deg, #ffffff, #e8f0ff);
+  color: #1f2937;
+  box-shadow: 0 10px 24px rgba(31,41,55,.16);
+}
+/* TOP 카페: '매출 1등' 탭을 핑크 그라데이션 + 블랙 텍스트로 */
+.rank-tabs .tab:nth-child(1).is-active{
+  background: linear-gradient(135deg, #ffd1e8 0%, #ffb3d6 50%, #ff8fc2 100%);
+  color: #111 !important;                /* 글씨 검정 */
+  border: 1px solid rgba(0,0,0,.08);     /* 은은한 테두리 */
+  text-shadow: none;
+  box-shadow: 0 10px 22px rgba(255, 105, 180, .28),
+              inset 0 1px 0 rgba(255,255,255,.5);
+}
+.rank-tabs .tab:nth-child(1).is-active:hover{
+  filter: brightness(1.04);
+}
+
+/* ===== 공통: 검색 카드 ===== */
+.search-screen{ display:grid; place-items:center; padding:20px; }
+.search-card{
+  width:min(420px,100%);
+  padding:16px 16px 18px;
+  border-radius:16px;
+  background:linear-gradient(180deg,#3d73c6,#2c5fa3);
+  color:#fff;
+  box-shadow:0 18px 36px rgba(16,24,40,.2);
+}
+.search-card .brand-title,
+.search-card .search-sub,
+.search-card .place,
+.search-card .loc { color:#fff; }
+.search-sub{ text-align:center; margin:4px 0 10px; opacity:.95; }
+.search-hero{ display:grid; place-items:center; margin:8px 0 14px; }
+
+/* 선택 버튼 2개 */
+.choice-grid{ display:grid; gap:12px; }
+.btn-choice{
+  height:60px; font-size:20px; font-weight:800; border-radius:18px;
+  background:linear-gradient(135deg,#fff,#eef4ff); color:#1f2937;
+  border:1px solid rgba(0,0,0,.06);
+}
+
+/* 뒤로가기 */
+.backlink{
+  background:transparent; border:0; color:#fff; cursor:pointer;
+  font-weight:700; margin-bottom:4px;
+}
+
+/* 입력/결과 */
+.search-inputs{ display:grid; gap:10px; }
+.search-input{ position:relative; }
+.search-input .icon{
+  position:absolute; left:12px; top:50%; transform:translateY(-50%);
+  pointer-events:none; font-size:16px;
+}
+.search-input input{
+  width:100%; height:46px; border-radius:999px;
+  padding:0 14px 0 36px; border:1px solid rgba(255,255,255,.55);
+  background:rgba(255,255,255,.22); color:#fff; outline:none;
+}
+.search-input input::placeholder{ color:rgba(255,255,255,.85); }
+.search-list{ list-style:none; margin:12px 2px 0; padding:0; display:grid; gap:6px; }
+.search-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:6px 8px; border-bottom:1px solid rgba(255,255,255,.25);
+}
+.search-empty{ text-align:center; padding:12px 0; opacity:.9; }
+/* ===== 공통 그라데이션 팔레트 ===== */
+:root{
+  --grad-yellow: #FFE88A;  /* 베이비 옐로우 */
+  --grad-pink:   #FFB3D6;  /* 베이비 핑크   */
+  --grad-white:  #FFFFFF;  /* 화이트        */
+  --text-dark:   #111;
+}
+
+/* ===== TOP 카페 카드 ===== */
+.top-screen .rank-card{
+  background: linear-gradient(180deg,
+    var(--grad-yellow) 0%,
+    var(--grad-pink) 55%,
+    var(--grad-white) 100%) !important;
+  color: var(--text-dark);
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+/* 탭(활성)도 동일 톤 */
+.top-screen .rank-tabs .tab.is-active{
+  background: linear-gradient(135deg,
+    var(--grad-yellow) 0%,
+    var(--grad-pink) 60%,
+    var(--grad-white) 100%) !important;
+  color: var(--text-dark);
+  border-color: rgba(0,0,0,.10);
+}
+
+/* 리스트/제목 텍스트 블랙 */
+.top-screen .rank-title,
+.top-screen .rank-row,
+.top-screen .rank-row .place,
+.top-screen .rank-row .loc{
+  color: var(--text-dark) !important;
+  text-shadow: none !important;
+}
+
+/* 하단 ZEBRA 버튼 톤 맞춤 */
+.top-screen .zebra-cta{
+  background: linear-gradient(135deg, #ffffff, #fff0f7) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+/* ===== 검색 선택/검색 카드도 동일 그라데이션(원하면 유지) ===== */
+.search-card{
+  background: linear-gradient(180deg,
+    var(--grad-yellow) 0%,
+    var(--grad-pink) 55%,
+    var(--grad-white) 100%) !important;
+  color: var(--text-dark);
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+/* 검색 카드 내부 텍스트도 블랙 */
+.search-card .brand-title,
+.search-card .search-sub,
+.search-card .place,
+.search-card .loc{
+  color: var(--text-dark) !important;
+  text-shadow: none !important;
+}
+
+/* 검색 인풋은 화이트 바탕 + 검정 글자 */
+.search-input input{
+  background: #ffffff !important;
+  color: var(--text-dark) !important;
+  border: 1px solid rgba(0,0,0,.14) !important;
+}
+.search-input input::placeholder{ color:#666 !important; }
+
+/* 검색 선택 화면 버튼 2개도 살짝 톤 맞춤 (선택사항) */
+.btn-choice{
+  background: linear-gradient(135deg, #ffffff, #fff0f7) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid rgba(0,0,0,.06);
+}

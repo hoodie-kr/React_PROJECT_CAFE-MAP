@@ -1,38 +1,32 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AppShell from "../components/AppShell.jsx";
-// 아이콘 쓰면 경로 맞추고, 없다면 이 줄은 지워도 됩니다.
-// import CafeStoreIcon from "../components/icons/CafeStoreIcon.jsx";
 
 export default function Login() {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    alert(`로그인 시도\nID: ${id}`);
+    // TODO: 실제 검증 로직 추가 가능
+    // alert(`로그인 시도\nID: ${id}`);
+    navigate("/menu");               // ✅ 로그인 후 이동
   };
 
   return (
     <AppShell>
-      {/* ⬇︎ 화면 중앙에만 카드 하나; '밑에 튀어나오는 바' 원인은 이전에 있던 빈 <div/> 였습니다. */}
-      <div className="screen screen--centered">
+      <div className="screen login-screen">
         <div className="auth-wrap">
-          <form onSubmit={onSubmit} className="app-card app-card--gradient app-card--tall">
+          <form onSubmit={onSubmit} className="app-card app-card--gradient">
             <div style={{ textAlign: "center", marginBottom: 8 }}>
               <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: ".08em" }}>
-                CAFE
+                ZEBRA
               </div>
               <div style={{ fontSize: 13, opacity: .95, marginTop: 6 }}>
                 로그인하고 카페 서비스를 즐겨보세요.
               </div>
             </div>
-
-            {/* 아이콘을 쓰고 싶으면 주석 해제
-            <div style={{ display:"grid", placeItems:"center", margin: "8px 0 14px" }}>
-              <CafeStoreIcon size={56} />
-            </div>
-            */}
 
             <div className="input-row" style={{ marginTop: 12 }}>
               <input
