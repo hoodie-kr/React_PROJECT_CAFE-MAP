@@ -850,3 +850,21 @@ body{
 @media (max-width: 480px){
   .top-screen { --topcard-h: 86vh; }
 }
+
+/* 카드가 화면을 넘지 않도록 상한만 잡아줌 */
+.app-card {
+  max-height: calc(100dvh - 40px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 카드 내부 컨텐츠는 스크롤 가능 */
+.app-card > *:last-child {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* (옵션) 슬라이더/지도 주변 여백 조정 */
+.search-hero { margin-top: 8px; }

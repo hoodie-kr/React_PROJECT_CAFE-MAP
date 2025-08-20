@@ -1,27 +1,28 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AppShell from "../components/AppShell.jsx";
-import CafeSlider from "../components/CafeSlider.jsx";
+import CAFES from "../data/cafes";
+import CafeSlider from "../components/CafeSlider";
 
 /* ✅ 탭별 슬라이드 세트 (이미지 경로는 public/cafes/ 에 맞춰줘) */
 const SLIDES_BY_TAB = {
   revenue: [
-    { name: "장발장",     src: "/cafes/jangbaljang.jpg" },
-    { name: "개화공간",   src: "/cafes/gaehwagongan.jpg" },
-    { name: "백가담",     src: "/cafes/baekgadam.jpg" },
-    { name: "기억의서재", src: "/cafes/memorylibrary.jpg" },
+    { name: "장발장",     src: "/cafes/1.jpg" },
+    { name: "개화공간",   src: "/cafes/2.jpg" },
+    { name: "백가담",     src: "/cafes/3.jpg" },
+    { name: "기억의서재", src: "/cafes/4.jpg" },
   ],
   reviews: [
-    { name: "노르웨이숲", src: "/cafes/norwayforest.jpg" },
-    { name: "리플라이",   src: "/cafes/reply.jpg" },
-    { name: "범어커피",   src: "/cafes/beomeo.jpg" },
-    { name: "베어드커피", src: "/cafes/baird.jpg" },
+    { name: "노르웨이숲", src: "/cafes/5.jpg" },
+    { name: "리플라이",   src: "/cafes/6.webp" },
+    { name: "범어커피",   src: "/cafes/7.jpg" },
+    { name: "베어드커피", src: "/cafes/8.png" },
   ],
   trending: [
-    { name: "빨강머리앤", src: "/cafes/redanne.jpg" },
-    { name: "나인어브제", src: "/cafes/nineobject.jpg" },
-    { name: "백가담",     src: "/cafes/baekgadam.jpg" },
-    { name: "장발장",     src: "/cafes/jangbaljang.jpg" },
+    { name: "빨강머리앤", src: "/cafes/9.jpg" },
+    { name: "나인어브제", src: "/cafes/10.jfif" },
+    { name: "백가담",     src: "/cafes/11.jfif" },
+    { name: "장발장",     src: "/cafes/12.webp" },
   ],
 };
 
