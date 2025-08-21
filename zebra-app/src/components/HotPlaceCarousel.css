@@ -1,0 +1,56 @@
+.hot-carousel {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,.2);
+  background: #f4f4f5;
+}
+
+.hot-carousel .slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity .8s ease, transform 10s linear; /* 페이드 + 느린 줌 */
+}
+
+.hot-carousel .slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hot-carousel .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0) 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px 16px;
+  color: #fff;
+}
+.hot-carousel .title { font-weight: 800; font-size: 18px; }
+.hot-carousel .caption { font-size: 12px; opacity: .85; }
+
+.hot-carousel .nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  border: none; width: 36px; height: 36px; border-radius: 999px;
+  background: rgba(255,255,255,.85); box-shadow: 0 4px 20px rgba(0,0,0,.2);
+  cursor: pointer;
+}
+.hot-carousel .nav:hover { background: rgba(255,255,255,.95); }
+.hot-carousel .nav.prev { left: 10px; }
+.hot-carousel .nav.next { right: 10px; }
+
+.hot-carousel .dots {
+  position: absolute; left: 0; right: 0; bottom: 10px;
+  display: flex; gap: 6px; justify-content: center;
+}
+.hot-carousel .dot {
+  width: 8px; height: 8px; border-radius: 999px; border: 0;
+  background: rgba(255,255,255,.6); cursor: pointer;
+}
+.hot-carousel .dot.on { background: #fff; width: 22px; }
