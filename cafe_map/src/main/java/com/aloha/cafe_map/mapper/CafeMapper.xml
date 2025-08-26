@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aloha.cafe_map.mapper.CafeMapper">
+
+  <select id="findNearby" parameterType="map" resultType="com.aloha.cafe_map.domain.CafeDto">
+    SELECT
+      c.id, c.name, c.address, c.lat, c.lng, c.rating,
+      c.review_count AS reviewCount, c.price_level AS priceLevel,
+      ST_Distance_Sphere(c.location, ST_SRID(POINT(#{lng},#{lat}),4326)) AS distanceM
+    FROM cafes c
+    <where>
+      ST_Distance_Sphere(c.location, ST_SRID(POINT(#{lng},#{lat}),4326)) <= #{radius}
+      <if test="q != null and q != ''">
+        AND (c.name LIKE CONCAT('%', #{q}, '%') OR c.address LIKE CONCAT('%', #{q}, '%'))
+      </if>
+      <if test="tagIds != null and tagIds.size > 0">
+        AND c.id IN (
+          SELECT ct.cafe_id FROM cafe_tag ct
+          WHERE ct.tag_id IN
+          <foreach collection="tagIds" item="tid" open="(" close=")" separator=",">#{tid}</foreach>
+          GROUP BY ct.cafe_id
+          HAVING COUNT(DISTINCT ct.tag_id) = #{tagCount}
+        )
+      </if>
+    </where>
+    <choose>
+      <when test="sort == 'rating'">
+        ORDER BY c.rating DESC, c.review_count DESC
+      </when>
+      <when test="sort == 'crowd'">
+        ORDER BY (
+          SELECT COUNT(*) FROM checkins ci
+           WHERE ci.cafe_id = c.id AND ci.created_at >= DATE_SUB(NOW(), INTERVAL 2 HOUR)
+        ) DESC, c.rating DESC
+      </when>
+      <otherwise>
+        ORDER BY distanceM ASC
+      </otherwise>
+    </choose>
+    LIMIT #{limit}
+  </select>
+
+  <select id="findTagIdsByNames" parameterType="list" resultType="long">
+    SELECT id FROM tags WHERE name IN
+    <foreach collection="list" item="n" open="(" close=")" separator=",">#{n}</foreach>
+  </select>
+
+  <select id="findTagsByCafeId" parameterType="long" resultType="string">
+    SELECT t.name FROM tags t
+    JOIN cafe_tag ct ON ct.tag_id=t.id
+    WHERE ct.cafe_id=#{cafeId}
+  </select>
+
+</mapper>

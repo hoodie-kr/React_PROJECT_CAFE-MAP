@@ -1,0 +1,50 @@
+CREATE TABLE IF NOT EXISTS cafes (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(120) NOT NULL,
+  address VARCHAR(255),
+  lat DECIMAL(10,7) NOT NULL,
+  lng DECIMAL(10,7) NOT NULL,
+  location POINT NOT NULL SRID 4326,
+  phone VARCHAR(40),
+  website VARCHAR(255),
+  rating FLOAT DEFAULT 0,
+  review_count INT DEFAULT 0,
+  price_level TINYINT DEFAULT 0,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE SPATIAL INDEX IF NOT EXISTS idx_cafes_location ON cafes(location);
+CREATE INDEX IF NOT EXISTS idx_rating_reviews ON cafes(rating, review_count);
+
+CREATE TABLE IF NOT EXISTS hours (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  cafe_id BIGINT NOT NULL,
+  day_of_week TINYINT NOT NULL, -- 0=일..6=토
+  open TIME NOT NULL,
+  close TIME NOT NULL,
+  break_start TIME NULL,
+  break_end TIME NULL,
+  FOREIGN KEY (cafe_id) REFERENCES cafes(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS tags (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(40) UNIQUE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS cafe_tag (
+  cafe_id BIGINT NOT NULL,
+  tag_id BIGINT NOT NULL,
+  PRIMARY KEY (cafe_id, tag_id),
+  FOREIGN KEY (cafe_id) REFERENCES cafes(id) ON DELETE CASCADE,
+  FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS checkins (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT NOT NULL,
+  cafe_id BIGINT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_checkins_recent ON checkins(cafe_id, created_at);
